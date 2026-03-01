@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Reading Practice – Exam Style</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.5;
+      background-color: #fafafa;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .exercise {
+      margin-bottom: 40px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: #fff;
+    }
+    .text-box {
+      background-color: #f7f7f7;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    ol {
+      padding-left: 20px;
+    }
+    .answer-space {
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    .small-note {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    select, input[type="text"] {
+      padding: 3px 6px;
+      margin: 2px 0;
+      min-width: 60px;
+    }
+    .correct {
+      background-color: #d2f8d2;
+    }
+    .incorrect {
+      background-color: #ffd6d6;
+    }
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    button {
+      padding: 8px 14px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Interactive Reading Practice – Exam Style</h1>
+
+  <!-- EXERCISE 1 – T / F / DS -->
+  <section class="exercise" id="exercise-1">
+    <h2>Exercise 1 – T / F / DS</h2>
+    <p class="small-note">
+      Read the text. Then choose <strong>T</strong> (true), <strong>F</strong> (false) or <strong>DS</strong> (doesn’t say).
+    </p>
+
+    <article class="text-box">
+      <h3>Smart Umbrella</h3>
+      <p>
+        Today, many people use special apps to check the weather, but a young inventor called
+        Mia wanted something different. She designed a “smart umbrella” for a school project.
+        The umbrella has a small light on the handle. When the weather is sunny, the light is
+        green. When it is cloudy, the light is yellow. When the light is red, it is going to rain.
+      </p>
+      <p>
+        Mia worked on her invention after school and at weekends. Her best friend helped her
+        to test the umbrella on rainy days. They walked around their town and wrote notes
+        in a small notebook about the weather and the colour of the light.
+      </p>
+      <p>
+        Mia’s science teacher was very impressed and sent a photo of the umbrella to a local
+        newspaper. A journalist wrote an article about Mia, and people in her town started to
+        ask where they could buy the umbrella. Mia doesn’t sell the umbrella now, but she
+        wants to improve it in the future and maybe make a company one day.
+      </p>
+    </article>
+
+    <ol>
+      <li>
+        <span class="answer-space">
+          <select class="tf-question" data-answer="F">
+            <option value="">---</option>
+            <option value="T">T</option>
+            <option value="F">F</option>
+            <option value="DS">DS</option>
+          </select>
+        </span>
+        Mia invented a special app to check the weather.
+      </li>
+      <li>
+        <span class="answer-space">
+          <select class="tf-question" data-answer="T">
+            <option value="">---</option>
+            <option value="T">T</option>
+            <option value="F">F</option>
+            <option value="DS">DS</option>
+          </select>
+        </span>
+        The smart umbrella uses different colours for different weather.
+      </li>
+      <li>
+        <span class="answer-space">
+          <select class="tf-question" data-answer="F">
+            <option value="">---</option>
+            <option value="T">T</option>
+            <option value="F">F</option>
+            <option value="DS">DS</option>
+          </select>
+        </span>
+        Mia only worked on the umbrella during her science lessons.
+      </li>
+      <li>
+        <span class="answer-space">
+          <select class="tf-question" data-answer="T">
+            <option value="">---</option>
+            <option value="T">T</option>
+            <option value="F">F</option>
+            <option value="DS">DS</option>
+          </select>
+        </span>
+        Mia and her friend tested the umbrella outside in their town.
+      </li>
+      <li>
+        <span class="answer-space">
+          <select class="tf-question" data-answer="T">
+            <option value="">---</option>
+            <option value="T">T</option>
+            <option value="F">F</option>
+            <option value="DS">DS</option>
+          </select>
+        </span>
+        A local newspaper wrote about Mia’s invention.
+      </li>
+      <li>
+        <span class="answer-space">
+          <select class="tf-question" data-answer="F">
+            <option value="">---</option>
+            <option value="T">T</option>
+            <option value="F">F</option>
+            <option value="DS">DS</option>
+          </select>
+        </span>
+        Mia already has a big company that sells umbrellas.
+      </li>
+    </ol>
+
+    <button type="button" onclick="checkExercise1()">Check Exercise 1</button>
+    <div id="result-ex1" class="result"></div>
+  </section>
+
+  <!-- EXERCISE 2 – COMPLETE THE SENTENCES -->
+  <section class="exercise" id="exercise-2">
+    <h2>Exercise 2 – Complete the sentences</h2>
+    <p class="small-note">
+      Read the email. Then complete the sentences with <strong>one or two words</strong>.
+    </p>
+
+    <article class="text-box">
+      <h3>Email from Alex</h3>
+      <p><strong>From:</strong> alex.green@example.com</p>
+      <p><strong>To:</strong> sam.lee@example.com</p>
+      <p><strong>Subject:</strong> Our school project</p>
+
+      <p>
+        Hi Sam,
+      </p>
+      <p>
+        How are you? I’m very excited about our new school project. Our teacher wants us to
+        make a poster about free-time activities. Yesterday I went to the library to look for
+        information. I found a great book about hobbies around the world. There were photos
+        of children who collect things, play musical instruments and do sports.
+      </p>
+      <p>
+        At the weekend, I interviewed my grandparents for the project. My grandad loves
+        gardening and my granny enjoys painting pictures. They both like reading books in
+        the evening. I wrote their answers in my notebook and took some photos of them in
+        the garden.
+      </p>
+      <p>
+        On Friday, I’m going to visit the sports centre to talk to some children about their
+        favourite free-time activities. Can you come with me? We can take photos and record
+        short interviews with my tablet.
+      </p>
+      <p>
+        See you soon,<br>
+        Alex
+      </p>
+    </article>
+
+    <ol>
+      <li>
+        Alex’s class has to make a poster about 
+        <span class="answer-space">
+          <input type="text" class="gap-question" 
+                 data-answer="free-time activities|free time activities">
+        </span>.
+      </li>
+      <li>
+        Alex went to the 
+        <span class="answer-space">
+          <input type="text" class="gap-question" data-answer="library">
+        </span>
+        to find information.
+      </li>
+      <li>
+        Alex’s grandad likes 
+        <span class="answer-space">
+          <input type="text" class="gap-question" data-answer="gardening">
+        </span>.
+      </li>
+      <li>
+        Alex’s granny enjoys 
+        <span class="answer-space">
+          <input type="text" class="gap-question" 
+                 data-answer="painting pictures">
+        </span>.
+      </li>
+      <li>
+        Alex wants to visit the 
+        <span class="answer-space">
+          <input type="text" class="gap-question" 
+                 data-answer="sports centre|sports center">
+        </span>
+        on Friday.
+      </li>
+    </ol>
+
+    <button type="button" onclick="checkExercise2()">Check Exercise 2</button>
+    <div id="result-ex2" class="result"></div>
+  </section>
+
+  <script>
+    function normalizeText(str) {
+      return str
+        .toLowerCase()
+        .replace(/[-]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function checkExercise1() {
+      const questions = document.querySelectorAll(".tf-question");
+      let correct = 0;
+
+      questions.forEach((select) => {
+        const user = (select.value || "").toUpperCase().trim();
+        const expected = (select.dataset.answer || "").toUpperCase().trim();
+
+        select.classList.remove("correct", "incorrect");
+
+        if (!user) {
+          // no answer, no colour
+          return;
+        }
+
+        if (user === expected) {
+          correct++;
+          select.classList.add("correct");
+        } else {
+          select.classList.add("incorrect");
+        }
+      });
+
+      document.getElementById("result-ex1").textContent =
+        "You got " + correct + " / " + questions.length + " correct.";
+    }
+
+    function checkExercise2() {
+      const gaps = document.querySelectorAll(".gap-question");
+      let correct = 0;
+
+      gaps.forEach((input) => {
+        const user = normalizeText(input.value || "");
+        const answers = (input.dataset.answer || "").split("|").map(a => normalizeText(a));
+
+        input.classList.remove("correct", "incorrect");
+
+        if (!user) {
+          // empty, no colour
+          return;
+        }
+
+        if (answers.includes(user)) {
+          correct++;
+          input.classList.add("correct");
+        } else {
+          input.classList.add("incorrect");
+        }
+      });
+
+      document.getElementById("result-ex2").textContent =
+        "You got " + correct + " / " + gaps.length + " correct.";
+    }
+  </script>
+
+</body>
+</html>
