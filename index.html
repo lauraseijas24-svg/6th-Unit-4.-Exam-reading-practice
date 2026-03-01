@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Tiger 6 – Unit 4 Reading Practice</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.12);
+      --error: #fb7185;
+      --ok: #22c55e;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 32px 16px 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 980px;
+    }
+
+    header {
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.35);
+      color: var(--text-muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    @media (min-width: 930px) {
+      .grid {
+        grid-template-columns: 1.1fr 1.1fr;
+      }
+    }
+
+    .exercise-card {
+      background: linear-gradient(145deg, rgba(15,23,42,0.96), rgba(15,23,42,0.8));
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.28);
+      box-shadow:
+        0 18px 45px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(15,23,42,0.8);
+      padding: 20px 18px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exercise-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0 0, rgba(56,189,248,0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(59,130,246,0.18), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .exercise-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .exercise-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .exercise-title {
+      font-size: 1.1rem;
+      font-weight: 650;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      color: var(--accent);
+      background: rgba(15,23,42,0.7);
+    }
+
+    .instructions {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .dialogue, .text-box {
+      background: radial-gradient(circle at top left, rgba(148,163,184,0.18), rgba(15,23,42,0.95));
+      border-radius: 14px;
+      padding: 14px 14px 10px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(148,163,184,0.35);
+      font-size: 0.9rem;
+    }
+
+    .dialogue-line {
+      margin-bottom: 5px;
+    }
+
+    .speaker {
+      font-weight: 600;
+      color: var(--accent);
+      margin-right: 4px;
+    }
+
+    .number {
+      color: var(--accent);
+      font-weight: 600;
+      margin: 0 3px;
+    }
+
+    .question-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+      font-size: 0.88rem;
+    }
+
+    .question-list li {
+      margin-bottom: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.35);
+      transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .mcq-group.correct {
+      border-color: rgba(34,197,94,0.9);
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.3);
+      background: radial-gradient(circle at top left, rgba(34,197,94,0.18), rgba(15,23,42,0.95));
+    }
+
+    .mcq-group.incorrect {
+      border-color: rgba(248,113,113,0.9);
+      box-shadow: 0 0 0 1px rgba(248,113,113,0.3);
+      background: radial-gradient(circle at top left, rgba(248,113,113,0.16), rgba(15,23,42,0.98));
+    }
+
+    .options {
+      display: grid;
+      gap: 4px 10px;
+      margin-top: 4px;
+    }
+
+    @media (min-width: 520px) {
+      .options {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      padding: 3px 4px;
+      border-radius: 6px;
+      transition: background-color 0.15s ease;
+    }
+
+    label:hover {
+      background: rgba(148,163,184,0.16);
+    }
+
+    input[type="radio"] {
+      accent-color: var(--accent);
+    }
+
+    .place-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--text-muted);
+    }
+
+    .tag span {
+      color: var(--accent);
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .text-title {
+      font-weight: 650;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+
+    .text-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .letters {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .letters span {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: rgba(15,23,42,0.9);
+    }
+
+    .question-number {
+      font-weight: 600;
+      color: var(--accent);
+      margin-right: 4px;
+    }
+
+    .select-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 6px;
+    }
+
+    select {
+      background: #020617;
+      color: var(--text-main);
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      padding: 3px 8px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.4);
+    }
+
+    select.correct {
+      border-color: var(--ok);
+      background: rgba(34,197,94,0.15);
+    }
+
+    select.incorrect {
+      border-color: var(--error);
+      background: rgba(248,113,113,0.12);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: radial-gradient(circle at top left, #38bdf8, #0ea5e9);
+      color: #0b1220;
+      box-shadow:
+        0 10px 25px rgba(56,189,248,0.45),
+        0 0 0 1px rgba(15,23,42,0.9);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 14px 28px rgba(56,189,248,0.5),
+        0 0 0 1px rgba(15,23,42,0.9);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow:
+        0 6px 14px rgba(56,189,248,0.35),
+        0 0 0 1px rgba(15,23,42,0.9);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px dashed rgba(148,163,184,0.7);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15,23,42,0.9);
+      border-style: solid;
+    }
+
+    .result {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .result span.ok {
+      color: var(--ok);
+      font-weight: 600;
+    }
+
+    .result span.bad {
+      color: var(--error);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="title">
+        Around the City – Reading Lab
+      </div>
+      <div class="pill">
+        New Tiger 6 · Unit 4 · Reading
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- READING 1 -->
+      <section class="exercise-card">
+        <div class="exercise-inner">
+          <div class="exercise-header">
+            <div class="exercise-title">Reading 1 – Tourist Information Call</div>
+            <span class="badge">Exam style A / B</span>
+          </div>
+          <p class="instructions">
+            Read the dialogue. For questions <strong>1–4</strong>, choose the correct question
+            (<strong>a</strong> or <strong>b</strong>) for Sara’s words.
+          </p>
+
+          <div class="dialogue">
+            <div class="dialogue-line">
+              <span class="speaker">Man:</span> Good morning. Tourist information office. How can I help you?
+            </div>
+            <div class="dialogue-line">
+              <span class="speaker">Sara:</span> Hello. <span class="number">(1)</span>
+            </div>
+            <div class="dialogue-line">
+              <span class="speaker">Man:</span> The theme park opens at <strong>10 o’clock</strong> every day. It closes at
+              <strong>six thirty</strong> in the evening.
+            </div>
+            <div class="dialogue-line">
+              <span class="speaker">Sara:</span> OK, thanks. <span class="number">(2)</span>
+            </div>
+            <div class="dialogue-line">
+              <span class="speaker">Man:</span> Yes, there is. There’s a big restaurant next to the main square and
+              a small café near the sports stadium.
+            </div>
+            <div class="dialogue-line">
+              <span class="speaker">Sara:</span> Great. <span class="number">(3)</span>
+            </div>
+            <div class="dialogue-line">
+              <span class="speaker">Man:</span> No, you can’t. It’s important to keep the park safe. You can’t cycle in
+              the theme park, but there is a bike path outside.
+            </div>
+            <div class="dialogue-line">
+              <span class="speaker">Sara:</span> One last question. <span class="number">(4)</span>
+            </div>
+            <div class="dialogue-line">
+              <span class="speaker">Man:</span> Yes, there is a <strong>wifi zone</strong> in the main square and you can use the
+              app on your smartphone to see the map of the park.
+            </div>
+          </div>
+
+          <ul class="question-list">
+            <li class="mcq-group" data-answer="b">
+              <strong>1</strong>
+              <div class="options">
+                <label>
+                  <input type="radio" name="r1-q1" value="a">
+                  a) Can you tell me <em>how I can get</em> to the theme park, please?
+                </label>
+                <label>
+                  <input type="radio" name="r1-q1" value="b">
+                  b) Can you tell me <em>what time</em> the theme park opens, please?
+                </label>
+              </div>
+            </li>
+
+            <li class="mcq-group" data-answer="a">
+              <strong>2</strong>
+              <div class="options">
+                <label>
+                  <input type="radio" name="r1-q2" value="a">
+                  a) Is there a restaurant in the park?
+                </label>
+                <label>
+                  <input type="radio" name="r1-q2" value="b">
+                  b) Is there a sports stadium in the city?
+                </label>
+              </div>
+            </li>
+
+            <li class="mcq-group" data-answer="a">
+              <strong>3</strong>
+              <div class="options">
+                <label>
+                  <input type="radio" name="r1-q3" value="a">
+                  a) Can I ride my bike in the theme park?
+                </label>
+                <label>
+                  <input type="radio" name="r1-q3" value="b">
+                  b) Can I go online in the sports stadium?
+                </label>
+              </div>
+            </li>
+
+            <li class="mcq-group" data-answer="b">
+              <strong>4</strong>
+              <div class="options">
+                <label>
+                  <input type="radio" name="r1-q4" value="a">
+                  a) Is there wheelchair access at the airport?
+                </label>
+                <label>
+                  <input type="radio" name="r1-q4" value="b">
+                  b) Is there a wifi zone in the park?
+                </label>
+              </div>
+            </li>
+          </ul>
+
+          <div class="actions">
+            <button class="btn" type="button" onclick="checkReading1()">
+              Check Reading 1
+            </button>
+            <button class="btn-secondary" type="button" onclick="resetReading1()">
+              Reset
+            </button>
+            <div id="result-r1" class="result"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- READING 2 -->
+      <section class="exercise-card">
+        <div class="exercise-inner">
+          <div class="exercise-header">
+            <div class="exercise-title">Reading 2 – City Guide</div>
+            <span class="badge">Exam style A / B / C</span>
+          </div>
+          <p class="instructions">
+            Read the guide to three places in the city. For questions <strong>1–6</strong>,
+            choose the correct place: <strong>A, B</strong> or <strong>C</strong>.
+          </p>
+
+          <div class="place-tags">
+            <div class="tag"><span>A</span> River View Wheel</div>
+            <div class="tag"><span>B</span> Sefton Park</div>
+            <div class="tag"><span>C</span> City Sports Stadium</div>
+          </div>
+
+          <div class="text-box">
+            <div class="text-title">A · River View Wheel</div>
+            <div class="text-sub">Near the port and the main square</div>
+            <p>
+              This enormous wheel is sixty metres tall. When it turns, you can see the
+              river, the airport and the lights of the shopping centre. The ride lasts
+              about fifteen minutes. There is a small café under the wheel with
+              <strong>wifi</strong>, so you can go online while you wait.
+            </p>
+          </div>
+
+          <div class="text-box">
+            <div class="text-title">B · Sefton Park</div>
+            <div class="text-sub">A green area for quiet walks and bikes</div>
+            <p>
+              This park is perfect when you are tired of the noisy main square.
+              There are trees, fountains and a big lake where you can rent a boat.
+              There is a café with wifi and a small information office. The park is
+              open <strong>twenty-four hours a day</strong> and it’s free to visit.
+            </p>
+          </div>
+
+          <div class="text-box">
+            <div class="text-title">C · City Sports Stadium</div>
+            <div class="text-sub">For football matches and big concerts</div>
+            <p>
+              This sports stadium is near the bank and the post office. People come
+              to see football matches at the weekend. On concert days, there are
+              thousands of people. There is a restaurant inside, but you can’t bring
+              your own food or drinks. After a match, you can walk to the main
+              square in ten minutes.
+            </p>
+          </div>
+
+          <ul class="question-list">
+            <li>
+              <span class="question-number">1</span>
+              You can see the airport and the port from here.
+              <span class="select-wrapper">
+                → <select class="r2-select" data-answer="A">
+                  <option value="">---</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </span>
+            </li>
+
+            <li>
+              <span class="question-number">2</span>
+              This place is free and always open.
+              <span class="select-wrapper">
+                → <select class="r2-select" data-answer="B">
+                  <option value="">---</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </span>
+            </li>
+
+            <li>
+              <span class="question-number">3</span>
+              There is usually a match or a concert here.
+              <span class="select-wrapper">
+                → <select class="r2-select" data-answer="C">
+                  <option value="">---</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </span>
+            </li>
+
+            <li>
+              <span class="question-number">4</span>
+              You can go online while you wait here.
+              <span class="select-wrapper">
+                → <select class="r2-select" data-answer="A">
+                  <option value="">---</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </span>
+            </li>
+
+            <li>
+              <span class="question-number">5</span>
+              This place is next to a bank and a post office.
+              <span class="select-wrapper">
+                → <select class="r2-select" data-answer="C">
+                  <option value="">---</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </span>
+            </li>
+
+            <li>
+              <span class="question-number">6</span>
+              Here you can walk, ride a bike or rent a boat.
+              <span class="select-wrapper">
+                → <select class="r2-select" data-answer="B">
+                  <option value="">---</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+
+          <div class="actions">
+            <button class="btn" type="button" onclick="checkReading2()">
+              Check Reading 2
+            </button>
+            <button class="btn-secondary" type="button" onclick="resetReading2()">
+              Reset
+            </button>
+            <div id="result-r2" class="result"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    function checkReading1() {
+      const groups = document.querySelectorAll(".mcq-group");
+      let correct = 0;
+      let attempted = 0;
+
+      groups.forEach(group => {
+        const expected = (group.dataset.answer || "").toUpperCase().trim();
+        const selected = group.querySelector("input[type='radio']:checked");
+
+        group.classList.remove("correct", "incorrect");
+
+        if (!selected) return;
+
+        attempted++;
+
+        if ((selected.value || "").toUpperCase().trim() === expected) {
+          correct++;
+          group.classList.add("correct");
+        } else {
+          group.classList.add("incorrect");
+        }
+      });
+
+      const total = groups.length;
+      const resultEl = document.getElementById("result-r1");
+
+      if (attempted === 0) {
+        resultEl.innerHTML = "Choose an answer for each question first.";
+      } else {
+        const cls = correct === total ? "ok" : "bad";
+        resultEl.innerHTML =
+          "Score: <span class=\"" + cls + "\">" +
+          correct + " / " + total + "</span>";
+      }
+    }
+
+    function resetReading1() {
+      const groups = document.querySelectorAll(".mcq-group");
+      groups.forEach(group => {
+        group.classList.remove("correct", "incorrect");
+        const radios = group.querySelectorAll("input[type='radio']");
+        radios.forEach(r => { r.checked = false; });
+      });
+      document.getElementById("result-r1").innerHTML = "";
+    }
+
+    function checkReading2() {
+      const selects = document.querySelectorAll(".r2-select");
+      let correct = 0;
+      let attempted = 0;
+
+      selects.forEach(sel => {
+        const expected = (sel.dataset.answer || "").toUpperCase().trim();
+        const value = (sel.value || "").toUpperCase().trim();
+
+        sel.classList.remove("correct", "incorrect");
+
+        if (!value) return;
+
+        attempted++;
+
+        if (value === expected) {
+          correct++;
+          sel.classList.add("correct");
+        } else {
+          sel.classList.add("incorrect");
+        }
+      });
+
+      const total = selects.length;
+      const resultEl = document.getElementById("result-r2");
+
+      if (attempted === 0) {
+        resultEl.innerHTML = "Choose A, B or C for each sentence first.";
+      } else {
+        const cls = correct === total ? "ok" : "bad";
+        resultEl.innerHTML =
+          "Score: <span class=\"" + cls + "\">" +
+          correct + " / " + total + "</span>";
+      }
+    }
+
+    function resetReading2() {
+      const selects = document.querySelectorAll(".r2-select");
+      selects.forEach(sel => {
+        sel.value = "";
+        sel.classList.remove("correct", "incorrect");
+      });
+      document.getElementById("result-r2").innerHTML = "";
+    }
+  </script>
+</body>
+</html>
